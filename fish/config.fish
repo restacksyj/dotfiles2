@@ -15,6 +15,15 @@
 
 set fish_greeting
 
+# Very useful code
+# function cenv
+#     if count $argv > /dev/null
+#         # vi -c "normal 128jztf.lct.$argv" ~/Documents/freightbro/fb-shipper/vendor/laravel/framework/src/Illuminate/Foundation/Application.php  -c 'wq'
+#         vi -es +"normal 128jztf.lct.$argv" ~/Documents/freightbro/fb-shipper/vendor/laravel/framework/src/Illuminate/Foundation/Application.php  -c 'wq'
+#         # ex +"norm 128jztf.lct.$argv" +"wq" ~/Documents/freightbro/fb-shipper/vendor/laravel/framework/src/Illuminate/Foundation/Application.php 
+#     end
+# end
+
 function current_branch  
     set ref (git symbolic-ref HEAD 2> /dev/null); or \
     set ref (git rev-parse --short HEAD 2> /dev/null); or return

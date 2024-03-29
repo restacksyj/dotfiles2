@@ -10,35 +10,36 @@ local wallpapers_glob = os.getenv("HOME")
 	.. "/Documents/wallpapers/wezterm/**"
 
 wezterm.on('trigger-vim-with-scrollback', function(window, pane)
-    local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
-    local name = os.tmpname()
-    local f = io.open(name, 'w+')
-    f:write(text)
-    f:flush()
-    f:close()
-
+    -- local name = os.tmpname()
+    -- local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
+    -- local f = io.open(name, 'w+')
+    -- f:write(text)
+    -- f:flush()
+    -- f:close()
+    --
     window:perform_action(
         act.SpawnCommandInNewWindow {
-            args = { 'nvim', name },
+            args = { 'sh', "-c", "tmux capture-pane -pS - | nvim - -c 'norm G' -c '?.' "},
         },
         pane
     )
-    wezterm.sleep_ms(10000)
-    os.remove(name)
+    -- wezterm.sleep_ms(10000)
+    -- os.remove(name)
 end)
 
 wezterm.on('gui-startup', function()
     local tab, pane, window = mux.spawn_window({})
     window:gui_window():maximize()
+    pane:send_text("tmux\n")
 end)
 
 local colors = require('lua/rose-pine').colors()
 local window_frame = require('lua/rose-pine').window_frame()
 local config = {
-    background = {
-		w.get_wallpaper(wallpapers_glob),
-		b.get_background(0.8, 0.8),
-	},
+ --    background = {
+	-- 	w.get_wallpaper(wallpapers_glob),
+	-- 	b.get_background(0.8, 0.8),
+	-- },
     adjust_window_size_when_changing_font_size = false,
     debug_key_events = false,
     -- disable_default_key_bindings = true,
@@ -46,7 +47,43 @@ local config = {
     native_macos_fullscreen_mode = false,
     window_close_confirmation = "NeverPrompt",
     window_decorations = "RESIZE",
-    colors = colors,
+    	colors = {
+		background = "#111",
+		force_reverse_video_cursor = true,
+		foreground = "#c5c9c5",
+
+		cursor_bg = "#C8C093",
+		cursor_fg = "#C8C093",
+		cursor_border = "#C8C093",
+
+		selection_fg = "#C8C093",
+		selection_bg = "#2D4F67",
+
+		scrollbar_thumb = "#16161D",
+		split = "#16161D",
+		ansi = {
+			"#0D0C0C",
+			"#C4746E",
+			"#8A9A7B",
+			"#C4B28A",
+			"#8BA4B0",
+			"#A292A3",
+			"#8EA4A2",
+			"#C8C093",
+		},
+		brights = {
+			"#A6A69C",
+			"#E46876",
+			"#87A987",
+			"#E6C384",
+			"#7FB4CA",
+			"#938AA9",
+			"#7AA89F",
+			"#C5C9C5",
+		},
+		indexed = { [16] = "#B6927B", [17] = "#B98D7B" },
+	},
+    -- colors = colors,
     window_frame = window_frame,
     default_prog = { '/usr/local/bin/fish', '-l' },
     automatically_reload_config = true,
@@ -68,7 +105,7 @@ local config = {
         { key = "Tab",   mods = "CTRL|SHIFT", action = wezterm.action { SendString = "\x1b[9;6u" } },
         {
             key = 'e',
-            mods = 'CTRL',
+            mods = 'SUPER',
             action = act.EmitEvent 'trigger-vim-with-scrollback',
         },
     }
