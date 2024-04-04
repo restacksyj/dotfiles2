@@ -7,7 +7,7 @@ local b = require("utils/background")
 local w = require("utils/wallpapers")
 
 local wallpapers_glob = os.getenv("HOME")
-	.. "/Documents/wallpapers/wezterm/**"
+    .. "/Documents/wallpapers/wezterm/**"
 
 wezterm.on('trigger-vim-with-scrollback', function(window, pane)
     -- local name = os.tmpname()
@@ -19,7 +19,7 @@ wezterm.on('trigger-vim-with-scrollback', function(window, pane)
     --
     window:perform_action(
         act.SpawnCommandInNewWindow {
-            args = { 'sh', "-c", "tmux capture-pane -pS - | nvim - -c 'norm G' -c '?.' "},
+            args = { 'sh', "-c", "tmux capture-pane -pS - | nvim - -c 'norm G' -c '?.' " },
         },
         pane
     )
@@ -36,10 +36,10 @@ end)
 local colors = require('lua/rose-pine').colors()
 local window_frame = require('lua/rose-pine').window_frame()
 local config = {
- --    background = {
-	-- 	w.get_wallpaper(wallpapers_glob),
-	-- 	b.get_background(0.8, 0.8),
-	-- },
+    --    background = {
+    -- 	w.get_wallpaper(wallpapers_glob),
+    -- 	b.get_background(0.8, 0.8),
+    -- },
     adjust_window_size_when_changing_font_size = false,
     debug_key_events = false,
     -- disable_default_key_bindings = true,
@@ -47,42 +47,42 @@ local config = {
     native_macos_fullscreen_mode = false,
     window_close_confirmation = "NeverPrompt",
     window_decorations = "RESIZE",
-    	colors = {
-		background = "#111",
-		force_reverse_video_cursor = true,
-		foreground = "#c5c9c5",
+    -- force_reverse_video_cursor = true,
+    colors = {
+        background = "#111",
+        foreground = "#c5c9c5",
 
-		cursor_bg = "#C8C093",
-		cursor_fg = "#C8C093",
-		cursor_border = "#C8C093",
+        cursor_bg = "#C8C093",
+        -- cursor_fg = "#C8C093",
+        cursor_border = "#C8C093",
 
-		selection_fg = "#C8C093",
-		selection_bg = "#2D4F67",
+        selection_fg = "#C8C093",
+        selection_bg = "#2D4F67",
 
-		scrollbar_thumb = "#16161D",
-		split = "#16161D",
-		ansi = {
-			"#0D0C0C",
-			"#C4746E",
-			"#8A9A7B",
-			"#C4B28A",
-			"#8BA4B0",
-			"#A292A3",
-			"#8EA4A2",
-			"#C8C093",
-		},
-		brights = {
-			"#A6A69C",
-			"#E46876",
-			"#87A987",
-			"#E6C384",
-			"#7FB4CA",
-			"#938AA9",
-			"#7AA89F",
-			"#C5C9C5",
-		},
-		indexed = { [16] = "#B6927B", [17] = "#B98D7B" },
-	},
+        scrollbar_thumb = "#16161D",
+        split = "#16161D",
+        ansi = {
+            "#0D0C0C",
+            "#C4746E",
+            "#8A9A7B",
+            "#C4B28A",
+            "#8BA4B0",
+            "#A292A3",
+            "#8EA4A2",
+            "#C8C093",
+        },
+        brights = {
+            "#A6A69C",
+            "#E46876",
+            "#87A987",
+            "#E6C384",
+            "#7FB4CA",
+            "#938AA9",
+            "#7AA89F",
+            "#C5C9C5",
+        },
+        indexed = { [16] = "#B6927B", [17] = "#B98D7B" },
+    },
     -- colors = colors,
     window_frame = window_frame,
     default_prog = { '/usr/local/bin/fish', '-l' },

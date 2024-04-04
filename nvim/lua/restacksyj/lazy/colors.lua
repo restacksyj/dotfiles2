@@ -1,10 +1,11 @@
-function ColorMyPencils(color)
-    color = color or "kanagawa-dragon"
-    vim.cmd.colorscheme(color)
-
-    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-end
+-- function ColorMyPencils(color)
+--     color = color or "kanagawa-dragon"
+--     -- color = color or "rose-pine"
+--     vim.cmd.colorscheme(color)
+--
+--     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+--     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- end
 
 return {
     {
@@ -47,8 +48,10 @@ return {
         name = "kanagawa",
         config = function()
             require('kanagawa').setup({
-                theme = "dragon",
                 colors = {
+                    palette = {
+                        sumiInk3 = "#0E0E0E",
+                    },
                     theme = {
                         all = {
                             ui = {
@@ -59,9 +62,9 @@ return {
                 }
             })
 
-            vim.cmd("colorscheme kanagawa-dragon")
+            vim.cmd("colorscheme kanagawa-wave")
 
-            ColorMyPencils()
+            -- ColorMyPencils()
         end
     }
 
