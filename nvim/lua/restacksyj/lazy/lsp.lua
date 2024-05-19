@@ -1,34 +1,34 @@
 vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'LSP actions',
-  callback = function(event)
-    local opts = {buffer = event.buf}
+    desc = 'LSP actions',
+    callback = function(event)
+        local opts = { buffer = event.buf }
 
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+        vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+        vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
-    vim.keymap.set("n", "<leader>vws", "<cmd> Telescope lsp_workspace_symbols<CR>", opts)
-    vim.keymap.set("n", "<leader>vd", function()
-        vim.diagnostic.open_float(nil, { focus = true, scope = "cursor" })
-    end)
-    vim.keymap.set("n", "[d", function()
-        vim.diagnostic.goto_next()
-    end, opts)
-    vim.keymap.set("n", "]d", function()
-        vim.diagnostic.goto_prev()
-    end, opts)
-    vim.keymap.set("n", "<leader>vca", function()
-        vim.lsp.buf.code_action()
-    end, opts)
-    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-    vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-    vim.keymap.set("n", "<leader>vrn", function()
-        vim.lsp.buf.rename()
-    end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-  end
+        vim.keymap.set("n", "<leader>vws", "<cmd> Telescope lsp_workspace_symbols<CR>", opts)
+        vim.keymap.set("n", "<leader>vd", function()
+            vim.diagnostic.open_float(nil, { focus = true, scope = "cursor" })
+        end)
+        vim.keymap.set("n", "[d", function()
+            vim.diagnostic.goto_next()
+        end, opts)
+        vim.keymap.set("n", "]d", function()
+            vim.diagnostic.goto_prev()
+        end, opts)
+        vim.keymap.set("n", "<leader>vca", function()
+            vim.lsp.buf.code_action()
+        end, opts)
+        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+        vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+        vim.keymap.set("n", "<leader>vrn", function()
+            vim.lsp.buf.rename()
+        end, opts)
+        vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    end
 })
 
 return {
@@ -88,6 +88,10 @@ return {
         })
 
         -- local cmp_select = { behavior = cmp.SelectBehavior.Select }
+        local has_words_before = function()
+            local line, col = vim.api.nvim_win_get_cursor(0);
+            return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        end
 
         cmp.setup({
             preselect = "none",
@@ -105,7 +109,7 @@ return {
                 ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
                 ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-                ['<CR>'] = cmp.mapping.confirm({select = false}),
+                ['<CR>'] = cmp.mapping.confirm({ select = false }),
                 ["<C-f>"] = cmp.mapping(function(fallback)
                     if require("luasnip").jumpable(1) then
                         require("luasnip").jump(1)
@@ -121,8 +125,35 @@ return {
                     end
                 end, { 'i', 's' }),
                 ["<C-Space>"] = cmp.mapping.complete(),
-                ["<Tab>"] = nil,
-                ["<S-Tab>"] = nil,
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif require("luasnip").locally_jumpable(1) then
+                        require("luasnip").jump(1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif require("luasnip").locally_jumpable(-1) then
+                        require("luasnip").jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+                -- ["<Tab>"] = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_next_item()
+                --     elseif has_words_before() then
+                --         cmp.complete()
+                --     else
+                --         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                --     end
+                -- end, { "i", "s" }),
+                -- ["<S-Tab>"] = nil,
                 ["<C-e>"] = cmp.mapping.abort(),
             }),
             sources = cmp.config.sources({
@@ -147,3 +178,4 @@ return {
         })
     end
 }
+

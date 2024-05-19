@@ -45,6 +45,7 @@ vim.keymap.set("n", "<leader>yfp", "<cmd>let @+ = @% | echo 'Copied filepath'<CR
 --vim.keymap.set("n", "\\", ":Neotree reveal toggle<CR>", { silent = true })
 -- vim.keymap.set("n", "<leader>m", require("treesj").toggle)
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>h", "<cmd>bd!<CR><cmd>q<CR>")
 --vim.keymap.set("n", "<leader>neo", "<cmd>Neorg index<CR>")
 --vim.keymap.set("n", "<leader>ner", "<cmd>Neorg return<CR>")
 --vim.keymap.set("n", "[c", function()

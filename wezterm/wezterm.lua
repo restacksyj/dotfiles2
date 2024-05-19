@@ -30,6 +30,7 @@ end)
 wezterm.on('gui-startup', function()
     local tab, pane, window = mux.spawn_window({})
     window:gui_window():maximize()
+    -- window:gui_window():toggle_fullscreen()
     pane:send_text("tmux\n")
 end)
 
@@ -40,7 +41,7 @@ local config = {
     -- 	w.get_wallpaper(wallpapers_glob),
     -- 	b.get_background(0.8, 0.8),
     -- },
-    adjust_window_size_when_changing_font_size = false,
+    adjust_window_size_when_changing_font_size = true,
     debug_key_events = false,
     -- disable_default_key_bindings = true,
     -- enable_tab_bar = false,
@@ -84,7 +85,7 @@ local config = {
         indexed = { [16] = "#B6927B", [17] = "#B98D7B" },
     },
     -- colors = colors,
-    window_frame = window_frame,
+    -- window_frame = window_frame,
     default_prog = { '/usr/local/bin/fish', '-l' },
     automatically_reload_config = true,
     line_height = 1.1,
@@ -113,5 +114,5 @@ local config = {
 }
 
 config.font = wezterm.font 'Berkeley Mono'
-config.font_size = 22
+config.font_size = 18
 return config

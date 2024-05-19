@@ -1,8 +1,8 @@
 return {
-    'numToStr/Comment.nvim',
-    opts = {
-        sticky=true
-    },
-    lazy = false,
+--     'numToStr/Comment.nvim',
+--     opts = {
+--         sticky=true
+--     },
+--     lazy = false,
 }
-
+--
