@@ -40,6 +40,15 @@ alias fl="redis-cli FLUSHDB"
 alias goo="go mod tidy && go mod vendor"
 
 
+function appid
+    if test (count $argv) -gt 0
+        osascript -e "id of app \"$argv[1]\""
+    else
+        echo "Please pass the application name as an argument."
+    end
+end
+
+
 function vi
     if count $argv > /dev/null
         nvim $argv
