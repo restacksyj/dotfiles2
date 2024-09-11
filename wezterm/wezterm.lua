@@ -9,7 +9,7 @@ local w = require("utils/wallpapers")
 local wallpapers_glob = os.getenv("HOME")
     .. "/Documents/wallpapers/wezterm/**"
 
-wezterm.on('trigger-vim-with-scrollback', function(window, pane)
+wezterm.on('vim-scrollback', function(window, pane)
     -- local name = os.tmpname()
     -- local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
     -- local f = io.open(name, 'w+')
@@ -37,10 +37,10 @@ end)
 local colors = require('lua/rose-pine').colors()
 local window_frame = require('lua/rose-pine').window_frame()
 local config = {
-    --    background = {
-    -- 	w.get_wallpaper(wallpapers_glob),
-    -- 	b.get_background(0.8, 0.8),
-    -- },
+       background = {
+    	w.get_wallpaper(wallpapers_glob),
+    	b.get_background(0.8, 0.8),
+    },
     adjust_window_size_when_changing_font_size = true,
     debug_key_events = false,
     -- disable_default_key_bindings = true,
@@ -48,7 +48,7 @@ local config = {
     native_macos_fullscreen_mode = false,
     window_close_confirmation = "NeverPrompt",
     window_decorations = "RESIZE",
-    -- force_reverse_video_cursor = true,
+    force_reverse_video_cursor = true,
     colors = {
         background = "#111",
         foreground = "#c5c9c5",
@@ -107,7 +107,7 @@ local config = {
         {
             key = 'e',
             mods = 'SUPER',
-            action = act.EmitEvent 'trigger-vim-with-scrollback',
+            action = act.EmitEvent 'vim-scrollback',
         },
     }
 

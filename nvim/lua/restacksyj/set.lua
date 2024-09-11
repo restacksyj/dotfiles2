@@ -38,9 +38,10 @@ vim.opt.updatetime = 50
 -- Don't pass messages to |ins-completion-menu|.
 vim.opt.shortmess:append("c")
 
-vim.opt.colorcolumn = "100"
+-- vim.opt.colorcolumn = "100"
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- Custom restacksyj vim options as provided by nvim-ufo
 vim.opt.foldcolumn = "1" -- '0' is not bad
@@ -51,4 +52,5 @@ vim.opt.foldenable = true
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 
 vim.opt.fixeol = false
+vim.opt.nrformats:append("alpha")
 

@@ -75,6 +75,16 @@ function gog
     end
 end
 
+function copyfile
+    if test -f "$argv"
+        set file_path (realpath $argv)
+        osascript -e "set the clipboard to POSIX file \"$file_path\""
+        echo "File copied to clipboard: $file_path"
+    else
+        echo "File not found: $argv"
+    end
+end
+
 function current_branch  
     set ref (git symbolic-ref HEAD 2> /dev/null); or \
     set ref (git rev-parse --short HEAD 2> /dev/null); or return
@@ -85,3 +95,6 @@ function parent
     git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
 end
 
+
+# Created by `pipx` on 2024-07-13 12:55:23
+set PATH $PATH /Users/restacksyj/.local/bin

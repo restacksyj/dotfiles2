@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = ";"
+vim.g.maplocalleader = ","
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -28,7 +28,7 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<C-y>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 
-vim.keymap.set("i", "<C-c>", "<Esc>")
+-- vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("i", "<C-d>", "<C-[>diwi")
 
 vim.keymap.set("n", "<leader>ff", ":lua vim.lsp.buf.format(nil, 2000)<CR>")
@@ -46,10 +46,9 @@ vim.keymap.set("n", "<leader>yfp", "<cmd>let @+ = @% | echo 'Copied filepath'<CR
 -- vim.keymap.set("n", "<leader>m", require("treesj").toggle)
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>h", "<cmd>bd!<CR><cmd>q<CR>")
+vim.keymap.set("n", "<CR>", "")
 --vim.keymap.set("n", "<leader>neo", "<cmd>Neorg index<CR>")
 --vim.keymap.set("n", "<leader>ner", "<cmd>Neorg return<CR>")
 --vim.keymap.set("n", "[c", function()
 --	require("treesitter-context").go_to_context()
 --end, { silent = true })
-
--- vim.keymap.set("n", "gp", "<Plug>PSInLinep<CR>")
