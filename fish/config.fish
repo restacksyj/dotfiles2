@@ -38,6 +38,7 @@ alias f="z"
 alias dy="dig +noall +answer +additional $argv @dns.toys"
 alias fl="redis-cli FLUSHDB"
 alias goo="go mod tidy && go mod vendor"
+alias pdf="tdf"
 
 
 function appid
@@ -97,4 +98,11 @@ end
 
 
 # Created by `pipx` on 2024-07-13 12:55:23
-set PATH $PATH /Users/restacksyj/.local/bin
+# set PATH $PATH /Users/restacksyj/.local/bin
+
+# bun
+#set --export BUN_INSTALL "$HOME/.bun"
+#set --export PATH $BUN_INSTALL/bin $PATH
+
+#source ~/.asdf/asdf.fish
+#source ~/.asdf/plugins/golang/set-env.fish

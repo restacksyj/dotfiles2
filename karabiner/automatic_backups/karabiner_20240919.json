@@ -1,0 +1,502 @@
+{
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Remaps control colon to backspace.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "quote",
+                                    "modifiers": { "mandatory": ["left_control"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": ["shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change right option to Hyper (i.e., command+control+option+shift)",
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_control", "left_option", "left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "S+D -> (S)uper(D)uper Mode",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.github\\.wez\\.wezterm$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "s" },
+                                        { "key_code": "d" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "insensitive",
+                                        "key_up_order": "insensitive",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "superduper-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "superduper-mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + I -> Left",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_arrow" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + J -> Down",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "down_arrow" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + K -> Up",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "^org\\.wezfurlong\\.wezterm$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "up_arrow" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + L -> Right",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_arrow" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + A -> Option",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_option" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + F -> Command",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_command" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + Space -> Shift",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_shift" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + U -> First Tab",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "1",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + O -> Next Tab",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": ["left_command", "left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "(S)uper(D)uper + P -> Last Tab",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "superduper-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Map ctrl + [ to escape",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Add Ctrl+Backward-Delete to Option+Delete (delete current word).",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": ["option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ],
+                        "type": "basic"
+                    },
+                    {
+                        "description": "Toggle CAPS_LOCK with LEFT_SHIFT + RIGHT_SHIFT",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_shift",
+                                    "modifiers": {
+                                        "mandatory": ["right_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "caps_lock" }],
+                                "to_if_alone": [{ "key_code": "left_shift" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": {
+                                        "mandatory": ["left_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "caps_lock" }],
+                                "to_if_alone": [{ "key_code": "right_shift" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Remaps control colon to backspace.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": { "mandatory": ["left_control"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Left ctrl + hjkl to arrow keys Vim",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "left_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "down_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "up_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "right_arrow" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 2099,
+                        "vendor_id": 1266
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "left_gui" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 189,
+                        "vendor_id": 1226
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        }
+                    ]
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": true,
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 640,
+                        "vendor_id": 13364
+                    },
+                    "ignore": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        }
+                    ]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "caps_lock" },
+                    "to": [{ "key_code": "left_control" }]
+                }
+            ]
+        },
+        { "name": "New profile" }
+    ]
+}

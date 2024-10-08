@@ -1,0 +1,1 @@
+/Users/restacksyj/.asdf/completions/asdf.fish

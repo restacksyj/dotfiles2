@@ -68,6 +68,19 @@ return {
 
             -- ColorMyPencils()
         end
-    }
+    },
+    -- {
+    --     "scottmckendry/cyberdream.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require("cyberdream").setup({
+    --             transparent = true,
+    --             borderless_telescope = true,
+    --             terminal_colors = true,
+    --         })
+    --         vim.cmd("colorscheme cyberdream")
+    --     end
+    -- }
 
 }

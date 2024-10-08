@@ -37,10 +37,10 @@ end)
 local colors = require('lua/rose-pine').colors()
 local window_frame = require('lua/rose-pine').window_frame()
 local config = {
-       background = {
-    	w.get_wallpaper(wallpapers_glob),
-    	b.get_background(0.8, 0.8),
-    },
+    --    background = {
+    -- 	w.get_wallpaper(wallpapers_glob),
+    -- 	b.get_background(0.8, 0.8),
+    -- },
     adjust_window_size_when_changing_font_size = true,
     debug_key_events = false,
     -- disable_default_key_bindings = true,

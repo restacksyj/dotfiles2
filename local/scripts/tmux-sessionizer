@@ -8,7 +8,7 @@ else
 	# get my project's namespaces
 	# I have it organized in namespaces per organization, so I have
 	# my personal org (caarlos0), one for work, one for goreleaser, and so on.
-	find ~/Documents ~/Documents/personal/ub ~/.config -type d -maxdepth 1 |
+	find ~/Documents ~/Documents/personal/ub ~/Documents/personal/goprojects ~/.config -type d -maxdepth 1 |
 	while read -r p; do
 		# get the projects in each namespace with their zoxide scores
 		zoxide query -l -s "$p/";
