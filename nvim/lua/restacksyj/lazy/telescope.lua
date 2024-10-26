@@ -10,6 +10,14 @@ return {
             return vim.fn.expand("%:p:h")
         end
         require('telescope').setup({
+            pickers  = {
+                find_files = {
+                    cwd = vim.fn.getcwd(-1),
+                },
+                live_grep = {
+                    cwd = vim.fn.getcwd(-1),
+                },
+            },
             defaults = {
                 mappings = {
                     i = {
@@ -27,14 +35,14 @@ return {
         })
 
         -- vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-        vim.keymap.set("n", "<C-p>",  builtin.find_files, {})
+        vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 
         vim.keymap.set("n", "<leader>vrc", function()
-           builtin.find_files({
-               prompt_title = "< Dotfiles >",
-               cwd = "~/.config/nvim",
-               hidden = true,
-           })
+            builtin.find_files({
+                prompt_title = "< Dotfiles >",
+                cwd = "~/.config/nvim",
+                hidden = true,
+            })
         end, {})
 
         local function isempty(s)
@@ -68,7 +76,5 @@ return {
         vim.keymap.set("n", "<leader>fj", function()
             builtin.current_buffer_fuzzy_find({ height = 10, previewer = false })
         end, {})
-
     end
 }
-

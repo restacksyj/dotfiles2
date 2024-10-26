@@ -42,6 +42,25 @@ return {
                         end
                     end,
                 },
+                ["<leader>yfp"] = {
+                    desc = 'Copy filepath to system clipboard',
+                    callback = function()
+                        require('oil.actions').copy_entry_path.callback()
+                        vim.fn.setreg("+", vim.fn.getreg(vim.v.register))
+                    end,
+                },
+                ["<leader>lo"] = {
+                    desc = 'Open current path in finder',
+                    callback = function()
+                        vim.cmd('silent !open .')
+                    end,
+                },
+                ["<leader>ld"] = {
+                    desc = 'Open Downloads folder',
+                    callback = function()
+                        require('oil').toggle_float("~/Downloads/")
+                    end,
+                },
                 ["g?"] = "actions.show_help",
                 ["<CR>"] = "actions.select",
                 ["<C-s>"] = false,
@@ -50,7 +69,7 @@ return {
                 ["<C-p>"] = false,
                 ["<C-c>"] = "actions.close",
                 ["<C-l>"] = false,
-                ["<C-m>"] = false,
+                ["<leader>r"] = "actions.refresh",
                 ["-"] = "actions.parent",
                 ["_"] = "actions.open_cwd",
                 ["`"] = "actions.cd",

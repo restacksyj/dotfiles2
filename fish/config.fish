@@ -98,7 +98,7 @@ end
 
 
 # Created by `pipx` on 2024-07-13 12:55:23
-# set PATH $PATH /Users/restacksyj/.local/bin
+set PATH $PATH /Users/restacksyj/.local/bin
 
 # bun
 #set --export BUN_INSTALL "$HOME/.bun"

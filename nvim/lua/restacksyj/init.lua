@@ -45,6 +45,18 @@ autocmd({ "VimEnter", "CursorMoved" }, {
 	end,
 })
 
+augroup("OilLocalCwd", { clear = true })
+autocmd("BufEnter", {
+  group = "OilLocalCwd",
+  callback = function(o)
+    if o.match:find("^oil://") then
+      vim.cmd("lcd " .. require("oil").get_current_dir())
+    else
+      vim.cmd("lcd " .. vim.fn.getcwd(-1))
+    end
+  end,
+})
+
 -- autocmd('LspAttach', {
 --     group = ThePrimeagenGroup,
 --     callback = function(e)

@@ -84,6 +84,15 @@ return {
                         }
                     }
                 end,
+                -- ["rust_analyzer"] = function()
+                --     local lspconfig = require("lspconfig")
+                --     lspconfig.rust_analyzer.setup {
+                --         capabilities = capabilities,
+                --         cargo = {
+                --             allFeatures = true,
+                --         }
+                --     }
+                -- end
             }
         })
 
@@ -178,4 +187,3 @@ return {
         })
     end
 }
-
