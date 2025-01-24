@@ -52,6 +52,23 @@ return {
         keys = {
             { "<leader>lp", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
         },
-
-   }
+    },
+    -- { 'wakatime/vim-wakatime', lazy = false }
+    {
+        "fasterius/simple-zoom.nvim",
+        config = true,
+    },
+    {
+        'pteroctopus/faster.nvim',
+        config = function ()
+           require('faster').setup()
+        end,
+        opts =  {
+            behaviours = {
+                bigfile = {
+                    filesize = 0.5
+                }
+            }
+        }
+    }
 }

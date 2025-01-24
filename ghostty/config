@@ -1,0 +1,16 @@
+command = fish
+theme = Kanagawa Dragon
+font-family = "Berkeley Mono"
+font-size = 26
+cursor-invert-fg-bg = true
+mouse-hide-while-typing = true
+initial-command = "tmux"
+title = ""
+window-decoration = false
+macos-titlebar-style = hidden
+copy-on-select = true
+keybind = global:ctrl+g=toggle_quick_terminal
+quick-terminal-animation-duration = 0.1
+
+keybind = ctrl+tab=csi:9;5u
+#keybind = "cmd+e=sh -c tmux capture-pane -pS - | nvim - -c"

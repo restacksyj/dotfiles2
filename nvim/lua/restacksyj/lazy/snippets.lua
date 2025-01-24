@@ -29,6 +29,27 @@ return {
                 }),
             })
 
+            ls.add_snippets("cpp", {
+                s("uss", {
+                    t({
+                        '#include <bits/stdc++.h>',
+                        'using namespace std;',
+                        '',
+                        'int main(){',
+                        '',
+                    }),
+                    i(1),
+                    t({
+                        '',
+                        '',
+                        '',
+                        '   return 0;',
+                        '}',
+                        '',
+                    }),
+                })
+            })
+
             ls.filetype_extend("javascript", { "jsdoc" })
             ls.filetype_extend("typescript", { "javascript" })
 

@@ -1,0 +1,2 @@
+  yabai -m config layout float
+  yabai -m rule --add app="^.*$" manage=off

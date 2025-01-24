@@ -76,7 +76,7 @@ function gog
     end
 end
 
-function copyfile
+function cf
     if test -f "$argv"
         set file_path (realpath $argv)
         osascript -e "set the clipboard to POSIX file \"$file_path\""
@@ -85,6 +85,8 @@ function copyfile
         echo "File not found: $argv"
     end
 end
+
+
 
 function current_branch  
     set ref (git symbolic-ref HEAD 2> /dev/null); or \
